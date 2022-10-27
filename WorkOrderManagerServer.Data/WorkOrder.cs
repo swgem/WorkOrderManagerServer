@@ -4,5 +4,6 @@
     {
         public int Id { get; set; }
         public string Client { get; set; }
+        public string ServiceSummary { get; set; }
     }
 }

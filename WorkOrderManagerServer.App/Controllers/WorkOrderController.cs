@@ -28,6 +28,14 @@ namespace WorkOrderManagerServer.Controllers
             return Ok(data);
         }
 
+        [HttpGet]
+        public IActionResult GetWorkOrders()
+        {
+            IQueryable<WorkOrder> data = _db.GetAllWorkOrders();
+
+            return Ok(data);
+        }
+
         [HttpGet("{Id}")]
         public IActionResult GetWorkOrder(int? id)
         {

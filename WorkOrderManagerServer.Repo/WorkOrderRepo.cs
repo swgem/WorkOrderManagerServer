@@ -43,6 +43,7 @@ namespace WorkOrderManagerServer.Repo
             {
                 WorkOrder _Entity = _db.WorkOrders.Find(workOrder.Id);
                 _Entity.Client = workOrder.Client;
+                _Entity.ServiceSummary = workOrder.ServiceSummary;
                 _db.SaveChanges();
             }
         }
