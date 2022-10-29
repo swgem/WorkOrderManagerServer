@@ -42,8 +42,21 @@ namespace WorkOrderManagerServer.Repo
             else
             {
                 WorkOrder _Entity = _db.WorkOrders.Find(workOrder.Id);
+                _Entity.DayId = workOrder.DayId;
+                _Entity.Status = workOrder.Status;
+                _Entity.Priority = workOrder.Priority;
+                _Entity.OrderOpeningDatetime = workOrder.OrderClosingDatetime;
+                _Entity.OrderClosingDatetime = workOrder.OrderClosingDatetime;
                 _Entity.Client = workOrder.Client;
-                _Entity.ServiceSummary = workOrder.ServiceSummary;
+                _Entity.Telephone = workOrder.Telephone;
+                _Entity.ClientRequest = workOrder.ClientRequest;
+                _Entity.Vehicle = workOrder.Vehicle;
+                _Entity.VehiclePlate = workOrder.VehiclePlate;
+                _Entity.ClientRequest = workOrder.ClientRequest;
+                _Entity.Pendencies = workOrder.Pendencies;
+                _Entity.Deadline = workOrder.Deadline;
+                _Entity.Remarks = workOrder.Remarks;
+
                 _db.SaveChanges();
             }
         }
