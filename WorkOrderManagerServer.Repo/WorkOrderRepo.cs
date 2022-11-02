@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,26 +37,39 @@ namespace WorkOrderManagerServer.Repo
         {
             if (workOrder.Id == 0)
             {
+                int dayId = 1;
+                WorkOrder? lastAddedWorkOrder = _db.WorkOrders.LastOrDefault();
+                if (lastAddedWorkOrder != null)
+                {
+                    DateTime dateTime = DateTime.ParseExact(lastAddedWorkOrder.OrderOpeningDatetime,
+                        "dd/MM/yyyy HH:mm:ss", null);
+
+                    if (dateTime.Date == DateTime.Now.Date)
+                        dayId = lastAddedWorkOrder.DayId + 1;
+                }
+                workOrder.DayId = dayId;
+
                 _db.WorkOrders.Add(workOrder);
                 _db.SaveChanges();
             }
             else
             {
-                WorkOrder _Entity = _db.WorkOrders.Find(workOrder.Id);
-                _Entity.DayId = workOrder.DayId;
-                _Entity.Status = workOrder.Status;
-                _Entity.Priority = workOrder.Priority;
-                _Entity.OrderOpeningDatetime = workOrder.OrderClosingDatetime;
-                _Entity.OrderClosingDatetime = workOrder.OrderClosingDatetime;
-                _Entity.Client = workOrder.Client;
-                _Entity.Telephone = workOrder.Telephone;
-                _Entity.ClientRequest = workOrder.ClientRequest;
-                _Entity.Vehicle = workOrder.Vehicle;
-                _Entity.VehiclePlate = workOrder.VehiclePlate;
-                _Entity.ClientRequest = workOrder.ClientRequest;
-                _Entity.Pendencies = workOrder.Pendencies;
-                _Entity.Deadline = workOrder.Deadline;
-                _Entity.Remarks = workOrder.Remarks;
+                WorkOrder entity = _db.WorkOrders.Find(workOrder.Id);
+
+                entity.DayId = workOrder.DayId;
+                entity.Status = workOrder.Status;
+                entity.Priority = workOrder.Priority;
+                entity.OrderOpeningDatetime = workOrder.OrderOpeningDatetime;
+                entity.OrderClosingDatetime = workOrder.OrderClosingDatetime;
+                entity.Client = workOrder.Client;
+                entity.Telephone = workOrder.Telephone;
+                entity.ClientRequest = workOrder.ClientRequest;
+                entity.Vehicle = workOrder.Vehicle;
+                entity.VehiclePlate = workOrder.VehiclePlate;
+                entity.ClientRequest = workOrder.ClientRequest;
+                entity.Pendencies = workOrder.Pendencies;
+                entity.Deadline = workOrder.Deadline;
+                entity.Remarks = workOrder.Remarks;
 
                 _db.SaveChanges();
             }

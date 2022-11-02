@@ -6,7 +6,7 @@ namespace WorkOrderManagerServer.Data
     {
         public int Id { get; set; }
         public int DayId { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         public int Priority { get; set; }
         public string OrderOpeningDatetime { get; set; }
         public string? OrderClosingDatetime { get; set; }
