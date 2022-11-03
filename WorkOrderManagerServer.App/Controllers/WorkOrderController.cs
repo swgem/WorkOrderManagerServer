@@ -15,10 +15,23 @@ namespace WorkOrderManagerServer.Controllers
             _db = db;
         }
 
-        [HttpPost] 
+        [HttpPut]
         public IActionResult Save([FromBody] WorkOrder data)
         {
-            if(data == null)
+            if (data == null || data.Id == 0)
+            {
+                return BadRequest();
+            }
+
+            _db.SaveWorkOrder(data);
+
+            return Ok(data);
+        }
+
+        [HttpPost]
+        public IActionResult Store([FromBody] WorkOrder data)
+        {
+            if(data == null || data.Id != 0)
             {
                 return BadRequest();
             }
