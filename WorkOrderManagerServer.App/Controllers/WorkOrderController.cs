@@ -16,7 +16,7 @@ namespace WorkOrderManagerServer.Controllers
         }
 
         [HttpPut]
-        public IActionResult Save([FromBody] WorkOrder data)
+        public IActionResult Update([FromBody] WorkOrder data)
         {
             if (data == null || data.Id == 0)
             {
