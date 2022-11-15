@@ -42,9 +42,18 @@ namespace WorkOrderManagerServer.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetWorkOrders()
+        public IActionResult GetWorkOrder([FromQuery(Name = "status")] List<string> status)
         {
-            IQueryable<WorkOrder> data = _db.GetAllWorkOrders();
+            IQueryable<WorkOrder> data;
+
+            if ((status?.Count ?? 0) == 0)
+            {
+                data = _db.GetAllWorkOrders();
+            }
+            else
+            {
+                data = _db.GetWorkOrdersFilteredByStatus(status);
+            }
 
             return Ok(data);
         }

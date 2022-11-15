@@ -18,7 +18,7 @@ namespace WorkOrderManagerServer.Repo
             _db = db;
         }
 
-        public void DeleteWorkOrder(int? id)
+        void IWorkOrder.DeleteWorkOrder(int? id)
         {
             WorkOrder wo = _db.WorkOrders.Find(id);
             _db.WorkOrders.Remove(wo);
@@ -27,13 +27,25 @@ namespace WorkOrderManagerServer.Repo
 
         IQueryable<WorkOrder> IWorkOrder.GetAllWorkOrders() => _db.WorkOrders;
 
-        public WorkOrder GetWorkOrder(int? id)
+        IQueryable<WorkOrder> IWorkOrder.GetWorkOrdersFilteredByStatus(List<string> status)
+        {
+            if ((status?.Count ?? 0) == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return _db.WorkOrders.Where(w => status.Contains(w.Status));
+            }
+        }
+
+        WorkOrder IWorkOrder.GetWorkOrder(int? id)
         {
             WorkOrder wo = _db.WorkOrders.Find(id);
             return wo;
         }
 
-        public void SaveWorkOrder(WorkOrder workOrder)
+        void IWorkOrder.SaveWorkOrder(WorkOrder workOrder)
         {
             if (workOrder.Id == 0)
             {

@@ -6,6 +6,7 @@ namespace WorkOrderManagerServer.Services
     {
         WorkOrder GetWorkOrder(int? id);
         IQueryable<WorkOrder> GetAllWorkOrders();
+        IQueryable<WorkOrder> GetWorkOrdersFilteredByStatus(List<string> status);
         void SaveWorkOrder(WorkOrder workOrder);
         void DeleteWorkOrder(int? id);
     }
