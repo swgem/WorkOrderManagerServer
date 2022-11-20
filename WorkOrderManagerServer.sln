@@ -3,16 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManagerServer.Api", "WorkOrderManagerServer.App\WorkOrderManagerServer.Api.csproj", "{C7294AA4-F36E-479E-B7CB-A10F9584551F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{86E8E8E7-05A7-4326-955D-592EA0B92FDC} = {86E8E8E7-05A7-4326-955D-592EA0B92FDC}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManagerServer.Api", "WorkOrderManagerServer.Api\WorkOrderManagerServer.Api.csproj", "{C7294AA4-F36E-479E-B7CB-A10F9584551F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManagerServer.Data", "WorkOrderManagerServer.Data\WorkOrderManagerServer.Data.csproj", "{BA33148C-7918-4C25-869D-D6C9BE8D3DFF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManagerServer.Services", "WorkOrderManagerServer.Services\WorkOrderManagerServer.Services.csproj", "{93C9B595-C717-4846-92FB-B904042B3993}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManagerServer.Repo", "WorkOrderManagerServer.Repo\WorkOrderManagerServer.Repo.csproj", "{86E8E8E7-05A7-4326-955D-592EA0B92FDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkOrderManagerServer.Identity", "WorkOrderManagerServer.Identity\WorkOrderManagerServer.Identity.csproj", "{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}"
 EndProject
@@ -32,14 +25,6 @@ Global
 		{BA33148C-7918-4C25-869D-D6C9BE8D3DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA33148C-7918-4C25-869D-D6C9BE8D3DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA33148C-7918-4C25-869D-D6C9BE8D3DFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93C9B595-C717-4846-92FB-B904042B3993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93C9B595-C717-4846-92FB-B904042B3993}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93C9B595-C717-4846-92FB-B904042B3993}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93C9B595-C717-4846-92FB-B904042B3993}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86E8E8E7-05A7-4326-955D-592EA0B92FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86E8E8E7-05A7-4326-955D-592EA0B92FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86E8E8E7-05A7-4326-955D-592EA0B92FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86E8E8E7-05A7-4326-955D-592EA0B92FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU

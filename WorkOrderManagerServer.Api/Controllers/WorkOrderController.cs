@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WorkOrderManagerServer.Data;
-using WorkOrderManagerServer.Services;
+using WorkOrderManagerServer.Application.DTOs.Models;
+using WorkOrderManagerServer.Application.Services;
 
 namespace WorkOrderManagerServer.Controllers
 {
@@ -10,9 +10,9 @@ namespace WorkOrderManagerServer.Controllers
     [ApiController]
     public class WorkOrderController : Controller
     {
-        private readonly IWorkOrder _db;
+        private readonly IWorkOrderService _db;
 
-        public WorkOrderController(IWorkOrder db)
+        public WorkOrderController(IWorkOrderService db)
         {
             _db = db;
         }
@@ -46,7 +46,7 @@ namespace WorkOrderManagerServer.Controllers
         [HttpGet]
         public IActionResult GetWorkOrder([FromQuery(Name = "status")] List<string> status)
         {
-            IQueryable<WorkOrder> data;
+            List<WorkOrder> data;
 
             if ((status?.Count ?? 0) == 0)
             {
@@ -61,7 +61,7 @@ namespace WorkOrderManagerServer.Controllers
         }
 
         [HttpGet("{Id}")]
-        public IActionResult GetWorkOrder(int? id)
+        public IActionResult GetWorkOrder(int id)
         {
             WorkOrder data = _db.GetWorkOrder(id);
 
@@ -69,7 +69,7 @@ namespace WorkOrderManagerServer.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int id)
         {
             _db.DeleteWorkOrder(id);
             return Ok();

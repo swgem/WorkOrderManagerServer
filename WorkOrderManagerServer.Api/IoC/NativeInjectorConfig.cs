@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WorkOrderManagerServer.Application.Services;
-using WorkOrderManagerServer.Identity.Configurations;
+using WorkOrderManagerServer.Data.Repo;
+using WorkOrderManagerServer.Data.Services;
 using WorkOrderManagerServer.Identity.Data;
 using WorkOrderManagerServer.Identity.Services;
-using WorkOrderManagerServer.Repo;
-using WorkOrderManagerServer.Services;
 
 namespace WorkOrderManagerServer.App.IoC
 {
@@ -22,7 +21,7 @@ namespace WorkOrderManagerServer.App.IoC
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IIdentityService, IdentityService>();
-            services.AddScoped<IWorkOrder, WorkOrderRepo>();
+            services.AddScoped<IWorkOrderService, WorkOrderService>();
         }
     }
 }

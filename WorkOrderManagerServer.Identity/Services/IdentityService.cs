@@ -7,7 +7,7 @@ using WorkOrderManagerServer.Application.DTOs.Request;
 using WorkOrderManagerServer.Identity.Configurations;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using WorkOrderManagerServer.Application.DTOs.Model;
+using WorkOrderManagerServer.Application.DTOs.Models;
 
 namespace WorkOrderManagerServer.Identity.Services
 {

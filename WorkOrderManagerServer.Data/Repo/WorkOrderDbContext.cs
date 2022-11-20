@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WorkOrderManagerServer.Data;
+using WorkOrderManagerServer.Data.Entities;
 
-namespace WorkOrderManagerServer.Repo
+namespace WorkOrderManagerServer.Data.Repo
 {
     public class WorkOrderDbContext : DbContext
     {
         public WorkOrderDbContext(DbContextOptions<WorkOrderDbContext> options) : base(options) { }
-        public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<WorkOrderEntity> WorkOrders { get; set; }
     }
 }

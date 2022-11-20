@@ -12,9 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WorkOrderManagerServer.Data\WorkOrderManagerServer.Data.csproj" />
     <ProjectReference Include="..\WorkOrderManagerServer.Identity\WorkOrderManagerServer.Identity.csproj" />
-    <ProjectReference Include="..\WorkOrderManagerServer.Repo\WorkOrderManagerServer.Repo.csproj" />
-    <ProjectReference Include="..\WorkOrderManagerServer.Services\WorkOrderManagerServer.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using WorkOrderManagerServer.Application.DTOs.Model;
+using WorkOrderManagerServer.Application.DTOs.Models;
 using WorkOrderManagerServer.Application.DTOs.Request;
 using WorkOrderManagerServer.Application.DTOs.Response;
 
