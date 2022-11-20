@@ -10,68 +10,68 @@ namespace WorkOrderManagerServer.Controllers
     [ApiController]
     public class WorkOrderController : Controller
     {
-        private readonly IWorkOrderService _db;
+        private readonly IWorkOrderService _workOrderService;
 
-        public WorkOrderController(IWorkOrderService db)
+        public WorkOrderController(IWorkOrderService workOrderService)
         {
-            _db = db;
+            _workOrderService = workOrderService;
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] WorkOrder data)
+        public async Task<IActionResult> Update([FromBody] WorkOrder data)
         {
             if (data == null || data.Id == 0)
             {
                 return BadRequest();
             }
 
-            _db.SaveWorkOrder(data);
+            await _workOrderService.SaveWorkOrder(data);
 
             return Ok(data);
         }
 
         [HttpPost]
-        public IActionResult Store([FromBody] WorkOrder data)
+        public async Task<IActionResult> Store([FromBody] WorkOrder data)
         {
             if(data == null || data.Id != 0)
             {
                 return BadRequest();
             }
 
-            _db.SaveWorkOrder(data);
+            await _workOrderService.SaveWorkOrder(data);
 
             return Ok(data);
         }
 
         [HttpGet]
-        public IActionResult GetWorkOrder([FromQuery(Name = "status")] List<string> status)
+        public async Task<IActionResult> GetWorkOrder([FromQuery(Name = "status")] List<string> status)
         {
             List<WorkOrder> data;
 
             if ((status?.Count ?? 0) == 0)
             {
-                data = _db.GetAllWorkOrders();
+                data = await _workOrderService.GetAllWorkOrders();
             }
             else
             {
-                data = _db.GetWorkOrdersFilteredByStatus(status);
+                data = await _workOrderService.GetWorkOrdersFilteredByStatus(status);
             }
 
             return Ok(data);
         }
 
         [HttpGet("{Id}")]
-        public IActionResult GetWorkOrder(int id)
+        public async Task<IActionResult> GetWorkOrder(int id)
         {
-            WorkOrder data = _db.GetWorkOrder(id);
+            WorkOrder? data = await _workOrderService.GetWorkOrder(id);
 
             return Ok(data);
         }
 
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _db.DeleteWorkOrder(id);
+            await _workOrderService.DeleteWorkOrder(id);
             return Ok();
         }
     }

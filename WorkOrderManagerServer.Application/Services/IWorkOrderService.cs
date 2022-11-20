@@ -4,10 +4,10 @@ namespace WorkOrderManagerServer.Application.Services
 {
     public interface IWorkOrderService
     {
-        WorkOrder? GetWorkOrder(int id);
-        List<WorkOrder> GetAllWorkOrders();
-        List<WorkOrder> GetWorkOrdersFilteredByStatus(List<string> status);
-        void SaveWorkOrder(WorkOrder workOrder);
-        void DeleteWorkOrder(int id);
+        Task<WorkOrder?> GetWorkOrder(int id);
+        Task<List<WorkOrder>> GetAllWorkOrders();
+        Task<List<WorkOrder>> GetWorkOrdersFilteredByStatus(List<string> status);
+        Task SaveWorkOrder(WorkOrder workOrder);
+        Task DeleteWorkOrder(int id);
     }
 }

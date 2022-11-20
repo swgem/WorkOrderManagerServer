@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -20,9 +21,9 @@ namespace WorkOrderManagerServer.Data.Services
             _db = db;
         }
 
-        void IWorkOrderService.DeleteWorkOrder(int id)
+        async Task IWorkOrderService.DeleteWorkOrder(int id)
         {
-            WorkOrderEntity? wo = _db.WorkOrders.Find(id);
+            WorkOrderEntity? wo = await _db.WorkOrders.FindAsync(id);
             if (wo != null)
             {
                 _db.WorkOrders.Remove(wo);
@@ -30,22 +31,24 @@ namespace WorkOrderManagerServer.Data.Services
             }
         }
 
-        List<WorkOrder> IWorkOrderService.GetAllWorkOrders()
+        async Task<List<WorkOrder>> IWorkOrderService.GetAllWorkOrders()
         {
             var response = new List<WorkOrder>();
-            foreach (var wo in _db.WorkOrders)
+            var workOrders = await _db.WorkOrders.ToListAsync();
+            foreach (var wo in workOrders)
             {
                 response.Add(WorkOrderEntityToModel(wo));
             }
             return response;
         }
 
-        List<WorkOrder> IWorkOrderService.GetWorkOrdersFilteredByStatus(List<string> status)
+        async Task<List<WorkOrder>> IWorkOrderService.GetWorkOrdersFilteredByStatus(List<string> status)
         {
             var response = new List<WorkOrder>();
             if (status != null && status.Any())
             {
-                foreach(var wo in _db.WorkOrders.Where(w => status.Contains(w.Status)))
+                var workOrders = await _db.WorkOrders.Where(w => status.Contains(w.Status)).ToListAsync();
+                foreach (var wo in workOrders)
                 {
                     response.Add(WorkOrderEntityToModel(wo));
                 }
@@ -53,10 +56,10 @@ namespace WorkOrderManagerServer.Data.Services
             return response;
         }
 
-        WorkOrder? IWorkOrderService.GetWorkOrder(int id)
+        async Task<WorkOrder?> IWorkOrderService.GetWorkOrder(int id)
         {
             WorkOrder? response = null;
-            WorkOrderEntity? entity = _db.WorkOrders.Find(id);
+            WorkOrderEntity? entity = await _db.WorkOrders.FindAsync(id);
             if (entity != null)
             {
                 response = WorkOrderEntityToModel(entity);
@@ -64,12 +67,12 @@ namespace WorkOrderManagerServer.Data.Services
             return response;
         }
 
-        void IWorkOrderService.SaveWorkOrder(WorkOrder workOrder)
+        async Task IWorkOrderService.SaveWorkOrder(WorkOrder workOrder)
         {
             if (workOrder.Id == 0)
             {
                 int dayId = 1;
-                WorkOrderEntity? lastAddedWorkOrder = _db.WorkOrders.LastOrDefault();
+                WorkOrderEntity? lastAddedWorkOrder = await _db.WorkOrders.LastOrDefaultAsync();
                 if (lastAddedWorkOrder != null)
                 {
                     DateTime dateTime = DateTime.ParseExact(lastAddedWorkOrder.OrderOpeningDatetime,
@@ -80,12 +83,12 @@ namespace WorkOrderManagerServer.Data.Services
                 }
                 workOrder.DayId = dayId;
 
-                _db.WorkOrders.Add(WorkOrderModelToEntity(workOrder));
-                _db.SaveChanges();
+                await _db.WorkOrders.AddAsync(WorkOrderModelToEntity(workOrder));
+                await _db.SaveChangesAsync();
             }
             else
             {
-                WorkOrderEntity? entity = _db.WorkOrders.Find(workOrder.Id);
+                WorkOrderEntity? entity = await _db.WorkOrders.FindAsync(workOrder.Id);
 
                 if(entity != null)
                 {
@@ -104,7 +107,7 @@ namespace WorkOrderManagerServer.Data.Services
                     entity.Deadline = workOrder.Deadline;
                     entity.Remarks = workOrder.Remarks;
 
-                    _db.SaveChanges();
+                    await _db.SaveChangesAsync();
                 }
             }
         }
