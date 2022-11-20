@@ -14,6 +14,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManagerServer.Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManagerServer.Repo", "WorkOrderManagerServer.Repo\WorkOrderManagerServer.Repo.csproj", "{86E8E8E7-05A7-4326-955D-592EA0B92FDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkOrderManagerServer.Identity", "WorkOrderManagerServer.Identity\WorkOrderManagerServer.Identity.csproj", "{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkOrderManagerServer.Application", "WorkOrderManagerServer.Application\WorkOrderManagerServer.Application.csproj", "{8DFAB5A8-26E2-4BDB-B015-89DEA25BE45E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,14 @@ Global
 		{86E8E8E7-05A7-4326-955D-592EA0B92FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86E8E8E7-05A7-4326-955D-592EA0B92FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86E8E8E7-05A7-4326-955D-592EA0B92FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86D4C9A9-3717-4292-9B8E-31FAF158C9FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DFAB5A8-26E2-4BDB-B015-89DEA25BE45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFAB5A8-26E2-4BDB-B015-89DEA25BE45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFAB5A8-26E2-4BDB-B015-89DEA25BE45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFAB5A8-26E2-4BDB-B015-89DEA25BE45E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
