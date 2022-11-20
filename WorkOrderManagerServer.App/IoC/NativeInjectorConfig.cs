@@ -14,11 +14,11 @@ namespace WorkOrderManagerServer.App.IoC
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<WorkOrderDbContext>(opt => opt.UseInMemoryDatabase("StdDb"));
-            services.AddDbContext<IdentityDataContext>(opt => opt.UseInMemoryDatabase("StdDb"));
+            services.AddDbContext<IdentityDbContext>(opt => opt.UseInMemoryDatabase("StdDb"));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDataContext>()
+                .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IIdentityService, IdentityService>();

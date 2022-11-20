@@ -5,7 +5,7 @@ using WorkOrderManagerServer.Services;
 
 namespace WorkOrderManagerServer.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Manager, Collaborator")]
     [Route("api/[controller]")]
     [ApiController]
     public class WorkOrderController : Controller

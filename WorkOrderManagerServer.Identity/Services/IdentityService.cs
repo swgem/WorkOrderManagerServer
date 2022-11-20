@@ -6,6 +6,8 @@ using WorkOrderManagerServer.Application.DTOs.Response;
 using WorkOrderManagerServer.Application.DTOs.Request;
 using WorkOrderManagerServer.Identity.Configurations;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using WorkOrderManagerServer.Application.DTOs.Model;
 
 namespace WorkOrderManagerServer.Identity.Services
 {
@@ -13,26 +15,53 @@ namespace WorkOrderManagerServer.Identity.Services
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JwtOptions _jwtOptions;
 
         public IdentityService(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             IOptions<JwtOptions> jwtOptions)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
             _jwtOptions = jwtOptions.Value;
+        }
+
+        async Task<List<User>> IIdentityService.GetAllUsers()
+        {
+            var users = _userManager.Users;
+
+            var response = new List<User>();
+            
+            foreach (var user in users)
+            {
+                var roles = string.Join(",", await _userManager.GetRolesAsync(user));
+                response.Add(new User(user.Id, user.UserName, roles));
+            }
+
+            return response;
         }
 
         async Task<UserRegisterResponse> IIdentityService.Register(UserRegisterRequest user)
         {
+            if (!await _roleManager.RoleExistsAsync("Basic"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Basic"));
+                await _roleManager.CreateAsync(new IdentityRole("Collaborator"));
+                await _roleManager.CreateAsync(new IdentityRole("Manager"));
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
             var identityUser = new IdentityUser { UserName = user.UserName };
 
             var result = await _userManager.CreateAsync(identityUser, user.Password);
 
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(identityUser, "Basic");
                 await _userManager.SetLockoutEnabledAsync(identityUser, false);
             }
 
@@ -75,18 +104,42 @@ namespace WorkOrderManagerServer.Identity.Services
 
             return response;
         }
+        async Task<UserUpdateRoleResponse> IIdentityService.UpdateRole(UserUpdateRoleRequest request)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == request.UserName);
+
+            UserUpdateRoleResponse response;
+            if(user == null)
+            {
+                response = new UserUpdateRoleResponse(false);
+                response.Errors.Add("Nome de usuário não encontrado");
+            }
+            else
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                if (roles != null && roles.Any())
+                {
+                    await _userManager.RemoveFromRolesAsync(user, roles);
+                }
+                await _userManager.AddToRoleAsync(user, request.Role);
+
+                response = new UserUpdateRoleResponse(true);
+            }
+
+            return response;
+        }
 
         private async Task<UserLoginResponse> GenerateToken(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
-            var tokenClaims = await GetClaims(user);
+            var claims = await GetClaims(user);
 
             var expirationDate = DateTime.Now.AddSeconds(_jwtOptions.Expiration);
 
             var jwt = new JwtSecurityToken(
                 issuer: _jwtOptions.Issuer,
                 audience: _jwtOptions.Audience,
-                claims: tokenClaims,
+                claims: claims,
                 notBefore: DateTime.Now,
                 expires: expirationDate,
                 signingCredentials: _jwtOptions.SigningCredentials);

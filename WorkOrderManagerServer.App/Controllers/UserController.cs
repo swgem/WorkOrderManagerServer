@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using WorkOrderManagerServer.Application.DTOs.Model;
 using WorkOrderManagerServer.Application.DTOs.Request;
 using WorkOrderManagerServer.Application.DTOs.Response;
 using WorkOrderManagerServer.Application.Services;
+using WorkOrderManagerServer.Data;
 
 namespace WorkOrderManagerServer.App.Controllers
 {
@@ -9,7 +14,7 @@ namespace WorkOrderManagerServer.App.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private IIdentityService _identityService;
+        private readonly IIdentityService _identityService;
 
         public UserController(IIdentityService identityService) =>
             _identityService = identityService;
@@ -54,6 +59,32 @@ namespace WorkOrderManagerServer.App.Controllers
             {
                 return Unauthorized(result);
             }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("update_role")]
+        public async Task<ActionResult<List<User>>> UpdateRole(UserUpdateRoleRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var data = await _identityService.UpdateRole(request);
+            return Ok(data);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<ActionResult<List<User>>> Get()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var data = await _identityService.GetAllUsers();
+            return Ok(data);
         }
     }
 }
