@@ -23,7 +23,7 @@ namespace WorkOrderManagerServer.App
         void Interfaces.IStartup.Configure(WebApplication app, IWebHostEnvironment env)
         {
             app.UseSwaggerUI();
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors(builder => builder
