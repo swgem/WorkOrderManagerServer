@@ -98,7 +98,7 @@ namespace WorkOrderManagerServer.Data.Services
                     entity.OrderOpeningDatetime = workOrder.OrderOpeningDatetime;
                     entity.OrderClosingDatetime = workOrder.OrderClosingDatetime;
                     entity.Client = workOrder.Client;
-                    entity.Telephone = workOrder.Telephone;
+                    entity.Phone = workOrder.Phone;
                     entity.ClientRequest = workOrder.ClientRequest;
                     entity.Vehicle = workOrder.Vehicle;
                     entity.VehiclePlate = workOrder.VehiclePlate;
@@ -115,14 +115,14 @@ namespace WorkOrderManagerServer.Data.Services
         private static WorkOrder WorkOrderEntityToModel(WorkOrderEntity w)
         {
             return new WorkOrder(w.Id, w.DayId, w.Status, w.Priority, w.OrderOpeningDatetime,
-                w.OrderClosingDatetime, w.Client, w.Telephone, w.Vehicle, w.VehiclePlate, w.ClientRequest,
+                w.OrderClosingDatetime, w.Client, w.Phone, w.Vehicle, w.VehiclePlate, w.ClientRequest,
                 w.Pendencies, w.Deadline, w.Remarks);
         }
 
         private static WorkOrderEntity WorkOrderModelToEntity(WorkOrder w)
         {
             return new WorkOrderEntity(w.Id, w.DayId, w.Status, w.Priority, w.OrderOpeningDatetime,
-                w.OrderClosingDatetime, w.Client, w.Telephone, w.Vehicle, w.VehiclePlate, w.ClientRequest,
+                w.OrderClosingDatetime, w.Client, w.Phone, w.Vehicle, w.VehiclePlate, w.ClientRequest,
                 w.Pendencies, w.Deadline, w.Remarks);
         }
     }

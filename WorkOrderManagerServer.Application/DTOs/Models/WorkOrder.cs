@@ -15,7 +15,7 @@ namespace WorkOrderManagerServer.Application.DTOs.Models
         public string OrderOpeningDatetime { get; set; }
         public string? OrderClosingDatetime { get; set; }
         public string Client { get; set; }
-        public string? Telephone { get; set; }
+        public string? Phone { get; set; }
         public string Vehicle { get; set; }
         public string? VehiclePlate { get; set; }
         public string ClientRequest { get; set; }
@@ -25,7 +25,7 @@ namespace WorkOrderManagerServer.Application.DTOs.Models
 
         public WorkOrder(int id, int dayId, string status, int priority,
             string orderOpeningDatetime, string? orderClosingDatetime,
-            string client, string? telephone, string vehicle,
+            string client, string? phone, string vehicle,
             string? vehiclePlate, string clientRequest, string? pendencies,
             string? deadline, string? remarks)
         {
@@ -36,7 +36,7 @@ namespace WorkOrderManagerServer.Application.DTOs.Models
             OrderOpeningDatetime = orderOpeningDatetime;
             OrderClosingDatetime = orderClosingDatetime;
             Client = client;
-            Telephone = telephone;
+            Phone = phone;
             Vehicle = vehicle;
             VehiclePlate = vehiclePlate;
             ClientRequest = clientRequest;
