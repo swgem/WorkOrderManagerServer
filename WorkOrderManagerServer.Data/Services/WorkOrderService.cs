@@ -72,7 +72,8 @@ namespace WorkOrderManagerServer.Data.Services
             if (workOrder.Id == 0)
             {
                 int dayId = 1;
-                WorkOrderEntity? lastAddedWorkOrder = await _db.WorkOrders.LastOrDefaultAsync();
+                WorkOrderEntity? lastAddedWorkOrder =
+                    await _db.WorkOrders.OrderByDescending(wo => wo.Id).FirstOrDefaultAsync();
                 if (lastAddedWorkOrder != null)
                 {
                     DateTime dateTime = DateTime.ParseExact(lastAddedWorkOrder.OrderOpeningDatetime,
