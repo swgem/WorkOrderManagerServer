@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
-using WorkOrderManagerServer.Application.DTOs.Models;
 using WorkOrderManagerServer.Application.DTOs.Request;
 using WorkOrderManagerServer.Application.DTOs.Response;
+using WorkOrderManagerServer.Application.Models;
 using WorkOrderManagerServer.Application.Services;
 
 namespace WorkOrderManagerServer.App.Controllers

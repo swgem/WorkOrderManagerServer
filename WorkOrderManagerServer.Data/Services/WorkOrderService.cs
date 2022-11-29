@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkOrderManagerServer.Application.DTOs.Models;
+using WorkOrderManagerServer.Application.Models;
 using WorkOrderManagerServer.Application.Services;
 using WorkOrderManagerServer.Data.Entities;
 using WorkOrderManagerServer.Data.Repo;

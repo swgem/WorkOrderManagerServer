@@ -1,4 +1,4 @@
-﻿using WorkOrderManagerServer.Application.DTOs.Models;
+﻿using WorkOrderManagerServer.Application.Models;
 
 namespace WorkOrderManagerServer.Application.Services
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using WorkOrderManagerServer.Application.DTOs.Models;
 using WorkOrderManagerServer.Application.DTOs.Request;
 using WorkOrderManagerServer.Application.DTOs.Response;
+using WorkOrderManagerServer.Application.Models;
 
 namespace WorkOrderManagerServer.Application.Services
 {

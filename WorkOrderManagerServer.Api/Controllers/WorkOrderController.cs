@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WorkOrderManagerServer.Application.DTOs.Models;
+using WorkOrderManagerServer.Application.Models;
 using WorkOrderManagerServer.Application.Services;
 
 namespace WorkOrderManagerServer.Controllers
